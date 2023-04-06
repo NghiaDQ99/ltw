@@ -34,7 +34,6 @@ public class CategoryDao {
                         return category;
 
                     });
-            System.out.println("DAO: " + listCate);
             return listCate;
         } catch (Exception ex){
             System.out.println("DAO exception: " + ex);

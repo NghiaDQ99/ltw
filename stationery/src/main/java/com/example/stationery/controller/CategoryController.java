@@ -1,13 +1,17 @@
 package com.example.stationery.controller;
 
+import com.example.stationery.dto.UploadMediaDto;
 import com.example.stationery.model.Category;
 import com.example.stationery.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,7 +23,33 @@ public class CategoryController {
     @GetMapping
     public ResponseEntity<?> getListCate() {
         List<Category> listCate = categoryService.getListCate();
-        System.out.println("controller: " + listCate);
         return ResponseEntity.ok().body(listCate);
+    }
+
+    @PostMapping("/upload/image")
+    public ResponseEntity<?> uploadImage(
+            @RequestParam("uFile") MultipartFile uploadFile,
+            @RequestParam("user_id") String user_id
+    ) throws IOException {
+        String fileName = uploadFile.getOriginalFilename();
+        String ext = fileName.substring(fileName.lastIndexOf("."));
+        if (!".jpg|.png".contains(ext)) {
+            ext = ".jpg";
+        }
+        String mediaFileName = user_id + "_" + ext;
+
+        String imageSubDir = "/usr_upload/" + "/image/";
+        boolean ret = new File(imageSubDir).mkdir();
+        System.out.println(ret);
+
+        String mediaPath = imageSubDir + "/" + mediaFileName;
+        uploadFile.transferTo(new File("D:\\Download"));
+
+        UploadMediaDto listImageDto = UploadMediaDto.builder()
+                .mediaPath(mediaPath)
+                .mediaUrl(mediaPath)
+                .build();
+
+        return ResponseEntity.ok().body(listImageDto);
     }
 }
