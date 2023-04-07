@@ -25,31 +25,4 @@ public class CategoryController {
         List<Category> listCate = categoryService.getListCate();
         return ResponseEntity.ok().body(listCate);
     }
-
-    @PostMapping("/upload/image")
-    public ResponseEntity<?> uploadImage(
-            @RequestParam("uFile") MultipartFile uploadFile,
-            @RequestParam("user_id") String user_id
-    ) throws IOException {
-        String fileName = uploadFile.getOriginalFilename();
-        String ext = fileName.substring(fileName.lastIndexOf("."));
-        if (!".jpg|.png".contains(ext)) {
-            ext = ".jpg";
-        }
-        String mediaFileName = user_id + "_" + ext;
-
-        String imageSubDir = "/usr_upload/" + "/image/";
-        boolean ret = new File(imageSubDir).mkdir();
-        System.out.println(ret);
-
-        String mediaPath = imageSubDir + "/" + mediaFileName;
-        uploadFile.transferTo(new File("D:\\Download"));
-
-        UploadMediaDto listImageDto = UploadMediaDto.builder()
-                .mediaPath(mediaPath)
-                .mediaUrl(mediaPath)
-                .build();
-
-        return ResponseEntity.ok().body(listImageDto);
-    }
 }

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.beans.Transient;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User implements Serializable {
     private int id;
-    private String user_name;
+    private String username;
     private String password;
     private String email;
     private String isAdmin;
