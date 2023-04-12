@@ -42,8 +42,8 @@ public class CategoryController {
         boolean ret = new File(imageSubDir).mkdir();
         System.out.println(ret);
 
-        String mediaPath = imageSubDir + "/" + mediaFileName;
-        uploadFile.transferTo(new File("D:\\Download"));
+        String mediaPath =  "D:\\Download" + imageSubDir + "/" + mediaFileName;
+        uploadFile.transferTo(new File(mediaPath));
 
         UploadMediaDto listImageDto = UploadMediaDto.builder()
                 .mediaPath(mediaPath)
