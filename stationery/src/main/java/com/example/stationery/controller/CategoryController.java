@@ -42,12 +42,12 @@ public class CategoryController {
         boolean ret = new File(imageSubDir).mkdir();
         System.out.println(ret);
 
-        String mediaPath =  "D:\\Download" + imageSubDir + "/" + mediaFileName;
-        uploadFile.transferTo(new File(mediaPath));
-
+        String mediaPath = imageSubDir + "/" + mediaFileName;
+        uploadFile.transferTo(new File("D:\\Download"));
+        String mediaLink = "D:\\Download" + mediaPath;
         UploadMediaDto listImageDto = UploadMediaDto.builder()
                 .mediaPath(mediaPath)
-                .mediaUrl(mediaPath)
+                .mediaUrl(mediaLink)
                 .build();
 
         return ResponseEntity.ok().body(listImageDto);
