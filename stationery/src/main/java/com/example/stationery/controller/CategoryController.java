@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -38,13 +41,13 @@ public class CategoryController {
         }
         String mediaFileName = user_id + "_" + ext;
 
-        String imageSubDir = "/usr_upload/" + "/image/";
-        boolean ret = new File(imageSubDir).mkdir();
-        System.out.println(ret);
 
-        String mediaPath = imageSubDir + "/" + mediaFileName;
-        uploadFile.transferTo(new File("D:\\Download"));
-        String mediaLink = "D:\\Download" + mediaPath;
+        String mediaPath = "/" + mediaFileName;
+        Path dir = Paths.get("D:\\avatarUser" + mediaPath);
+        Files.createDirectory(dir);
+
+        uploadFile.transferTo(new File("D:\\avatarUser" + mediaPath));
+        String mediaLink = "D:\\avatarUser" + mediaPath;
         UploadMediaDto listImageDto = UploadMediaDto.builder()
                 .mediaPath(mediaPath)
                 .mediaUrl(mediaLink)

@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.beans.Transient;
 import java.util.ArrayList;
@@ -23,11 +23,11 @@ public class User {
     private String isAdmin;
     private String avatar;
 
-    @Transient
-    public List<GrantedAuthority> getAuthority(){
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(getIsAdmin()));
-        return authorities;
-    }
+//    @Transient
+//    public List<GrantedAuthority> getAuthority(){
+//        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+//        authorities.add(new SimpleGrantedAuthority(getIsAdmin()));
+//        return authorities;
+//    }
 
 }

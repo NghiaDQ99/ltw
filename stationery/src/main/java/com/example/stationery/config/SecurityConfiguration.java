@@ -1,2 +1,2 @@
-package com.example.stationery.config;public class SecurityConfiguration {
-}
+//package com.example.stationery.config;public class SecurityConfiguration {
+//}
